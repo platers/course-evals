@@ -163,6 +163,8 @@ function groupBy(data, key) {
         }
         if (key == 'code') {
             d[k][0]['term'] = 'N/A';
+            d[k][0]['last_name'] = 'N/A';
+            d[k][0]['first_name'] = 'N/A';
         }
         if (key == 'instructor') {
             d[k][0]['code'] = 'N/A';
