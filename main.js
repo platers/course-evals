@@ -105,10 +105,18 @@ function groupBy(data, key){
     var d = {};
     var grouped = [];
     for (var i = 0; i < data.length; i++) {
-        if(!(data[i][key] in d)){
-            d[data[i][key]] = [];
-        }
-        d[data[i][key]].push(data[i]);        
+        if(key == 'instructor'){
+            var name = data[i]['first_name'] + data[i]['last_name'];
+            if(!(name in d)){
+                d[name] = [];
+            }
+            d[name].push(data[i]);   
+        } else{
+            if(!(data[i][key] in d)){
+                d[data[i][key]] = [];
+            }
+            d[data[i][key]].push(data[i]);      
+        }  
     }
     for(var k in d){
         for(var i = 1; i < d[k].length; i++){
