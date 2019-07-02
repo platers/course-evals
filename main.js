@@ -40,8 +40,8 @@ d3.csv(large).then(function (data) {
         data[i]['enthusiasm'] = parseFloat(data[i]['enthusiasm']);
         data[i]['workload'] = parseFloat(data[i]['workload']);
         data[i]['recommend'] = parseFloat(data[i]['recommend']);
-        data[i]['invited'] = parseInt(data[i]['recommend']);
-        data[i]['respondents'] = parseInt(data[i]['respondents']);
+        data[i]['invited'] = parseFloat(data[i]['invited']);
+        data[i]['respondents'] = parseFloat(data[i]['respondents']);
     }
 
     DATA = data;
@@ -177,6 +177,4 @@ function groupBy(data, key){
     return grouped;
 }
 
-$(document).ready(function() {  // required for materialize select
-    $('select').formSelect();
-});
+M.AutoInit();

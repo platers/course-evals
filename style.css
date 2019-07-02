@@ -1,0 +1,29 @@
+table{
+    table-layout: fixed;
+    width: 100%;
+}
+
+.header{
+    cursor: pointer;
+    text-align: center;
+}
+
+.wid3{
+    width: 3%;
+}
+
+.wid5{
+    width: 5%;
+}
+
+.wid6{
+    width: 6%;
+}
+
+.wid10{
+    width: 10%;
+}
+
+td{
+    text-align: center;
+}
