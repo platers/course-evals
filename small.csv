@@ -1,0 +1,6 @@
+dept,division,course,last_name,first_name,term,year,item1,item2,item3,item4,item5,item6,enthusiasm,workload,recommend,invited,respondents,code,name
+ANA,ARTSC,Human Anat Histol ANA300Y1-Y-LEC0101,Ballyk,Barbara,Winter,2018,4.6,4.8,4.8,4.2,4.2,4.4,4.9,4.3,4.0,177.0,52,ANA300Y1,Human Anat Histol
+ANA,ARTSC,Human Anat Histol ANA300Y1-Y-LEC0101,Faiz,Maryam,Winter,2018,4.6,4.8,3.6,4.2,4.2,4.4,3.7,4.3,4.0,177.0,52,ANA300Y1,Human Anat Histol
+ANA,ARTSC,Human Embryology ANA301H1-S-LEC0101,Bentley,Danielle,Winter,2018,4.7,4.9,4.8,4.4,4.4,4.5,4.9,3.9,4.4,166.0,92,ANA301H1,Human Embryology
+ANA,ARTSC,Anatomy Dissections ANA400H1-S-LEC0101,Bentley,Danielle,Winter,2018,5.0,5.0,5.0,4.9,4.9,5.0,5.0,3.7,5.0,20.0,13,ANA400H1,Anatomy Dissections
+ANA,ARTSC,Human Anat Histol ANA300Y1-Y-LEC0101,Ballyk,Barbara,Winter,2017,4.6,4.8,4.7,4.1,4.0,4.2,4.8,4.5,3.9,236.0,133,ANA300Y1,Human Anat Histol

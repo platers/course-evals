@@ -4,7 +4,7 @@ function tableCreate(data){
         tbl  = document.createElement('table');
 
     for(var i = 0; i < data.length; i++){
-        var tr = tbl.insertRow();
+        var tr = document.createElement('tr');
         var keys = Object.keys(data[i]);
         for(var j = 0; j < keys.length; j++){
                 var td = tr.insertCell();
