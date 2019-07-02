@@ -44,8 +44,8 @@ d3.csv(large).then(function (data) {
         data[i]['respondents'] = parseFloat(data[i]['respondents']);
     }
 
-    DATA = data;
-    RAW_DATA = data;
+    DATA = Array.from(data);
+    RAW_DATA = Array.from(data);
     tableCreate(data);
 })
 
@@ -66,16 +66,20 @@ function compareValues(key, order = 'asc') {
 
 var current_sort_column = 'dept';
 var current_sort_direction = 'asc';
-function sortBy(key) {
+function sortBy(data, key) {
+    current_sort_column = key;
+    console.log(key, current_sort_direction);
+    data.sort(compareValues(key, current_sort_direction));
+    return data;
+}
+
+function sortClicked(key){
     if (current_sort_column == key) {
         current_sort_direction = (current_sort_direction == 'asc') ? 'desc' : 'asc';
     } else {
         current_sort_direction = 'asc';
     }
-    current_sort_column = key;
-    console.log(key, current_sort_direction);
-    DATA.sort(compareValues(key, current_sort_direction));
-    console.log("Sorted", DATA[0]);
+    DATA = sortBy(DATA, key);
     tableCreate(DATA);
 }
 
@@ -90,12 +94,12 @@ function applyFilters() {
             (new RegExp(dept_input, 'i')).test(RAW_DATA[i].dept) &&
             (new RegExp(last_name_input, 'i')).test(RAW_DATA[i].last_name) &&
             (new RegExp(first_name_input, 'i')).test(RAW_DATA[i].first_name)) {
-            DATA.push(RAW_DATA[i]);
+            DATA.push(Object.assign({}, RAW_DATA[i]));
         }
     }
 
     var group_input = $('#select').val();
-    if(group_input != ""){
+    if(group_input != "none"){
         DATA = groupBy(DATA, group_input);
     }
     tableCreate(DATA);
@@ -119,41 +123,30 @@ function groupBy(data, key){
         }  
     }
     for(var k in d){
-        for(var i = 1; i < d[k].length; i++){
-            d[k][0]['item1'] += d[k][i]['item1'];
-            d[k][0]['item2'] += d[k][i]['item2'];
-            d[k][0]['item3'] += d[k][i]['item3'];
-            d[k][0]['item4'] += d[k][i]['item4'];
-            d[k][0]['item5'] += d[k][i]['item5'];
-            d[k][0]['item6'] += d[k][i]['item6'];
-            d[k][0]['invited'] += d[k][i]['invited'];
-            d[k][0]['recommend'] += d[k][i]['recommend'];
-            d[k][0]['workload'] += d[k][i]['workload'];
-            d[k][0]['respondents'] += d[k][i]['respondents'];
-            d[k][0]['enthusiasm'] += d[k][i]['enthusiasm'];
+        var keys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm'];
+        var dict = {};
+        for(var j of keys){
+            dict[j] = [];
         }
-        d[k][0]['item1'] /= d[k].length;
-        d[k][0]['item2'] /= d[k].length;
-        d[k][0]['item3'] /= d[k].length;
-        d[k][0]['item4'] /= d[k].length;
-        d[k][0]['item5'] /= d[k].length;
-        d[k][0]['item6'] /= d[k].length;
-        d[k][0]['invited'] /= d[k].length;
-        d[k][0]['recommend'] /= d[k].length;
-        d[k][0]['workload'] /= d[k].length;
-        d[k][0]['respondents'] /= d[k].length;
-        d[k][0]['enthusiasm'] /= d[k].length;
-        d[k][0]['item1'] = +(d[k][0]['item1'].toFixed(1));
-        d[k][0]['item2'] = +(d[k][0]['item2'].toFixed(1));
-        d[k][0]['item3'] = +(d[k][0]['item3'].toFixed(1));
-        d[k][0]['item4'] = +(d[k][0]['item4'].toFixed(1));
-        d[k][0]['item5'] = +(d[k][0]['item5'].toFixed(1));
-        d[k][0]['item6'] = +(d[k][0]['item6'].toFixed(1));
-        d[k][0]['invited'] = +(d[k][0]['invited'].toFixed(1));
-        d[k][0]['recommend'] = +(d[k][0]['recommend'].toFixed(1));
-        d[k][0]['workload'] = +(d[k][0]['workload'].toFixed(1));
-        d[k][0]['respondents'] = +(d[k][0]['respondents'].toFixed(1));
-        d[k][0]['enthusiasm'] = +(d[k][0]['enthusiasm'].toFixed(1));
+        for(var i = 1; i < d[k].length; i++){
+            for(var j of keys){
+                if(!isNaN(d[k][i][j])){
+                    dict[j].push(d[k][i][j]);
+                }
+            }
+            for(var j of keys){
+                if(dict[j].length > 0){
+                    var s = 0;
+                    for(var x of dict[j]){
+                        s += x;
+                    }
+                    d[k][0][j] = s / dict[j].length;
+                    d[k][0][j] = +(d[k][0][j].toFixed(1));
+                } else{
+                    d[k][0][j] = NaN;
+                }
+            }
+        }
 
         if(key == 'dept'){
             d[k][0]['code'] = 'N/A';

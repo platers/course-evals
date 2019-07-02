@@ -36,7 +36,7 @@
             </div>
             <div class="input-field col s2">
                 <select id="select">
-                    <option value="" selected>None</option>
+                    <option value="none" selected>None</option>
                     <option value="dept">Department</option>
                     <option value="code">Course</option>
                     <option value="instructor">Instructor</option>
@@ -50,26 +50,26 @@
     <table class="highlight">
         <thead>
             <tr>
-                <th class=" header hoverable wid5" onclick="sortBy('dept')">Department</th>
-                <th class=" header hoverable wid5" onclick="sortBy('division')">Division</th>
-                <th class=" header hoverable wid5" onclick="sortBy('code')">Code</th>
-                <th class=" header hoverable wid6" onclick="sortBy('name')">Name</th>
-                <th class=" header hoverable wid5" onclick="sortBy('last_name')">Last name</th>
-                <th class=" header hoverable wid5" onclick="sortBy('first_name')">First name</th>
-                <th class=" header hoverable wid3" onclick="sortBy('term')">Term</th>
-                <th class=" header hoverable wid3" onclick="sortBy('year')">Year</th>
-                <th class="tooltipped header hoverable wid3" data-tooltip="I found the course intellectually stimulating" data-position="top" onclick="sortBy('item1')">Item1</th>
-                <th class="tooltipped header hoverable wid3" data-tooltip="The course provided me with a deeper understanding of the subject matter" data-position="top" onclick="sortBy('item2')">Item2</th>
-                <th class="tooltipped header hoverable wid3" data-tooltip="The instructor created a course atmosphere that was conducive to my learning" data-position="top" onclick="sortBy('item3')">Item3</th>
-                <th class="tooltipped header hoverable wid3" data-tooltip="Course projects, assignments, tests and/or exams improved my understanding of the course material" data-position="top" onclick="sortBy('item4')">Item4</th>
-                <th class="tooltipped header hoverable wid3" data-tooltip="Course projects, assignments, tests and/or exams provided opportunity for me to demonstrate an understanding of the course material" data-position="top" onclick="sortBy('item5')">Item5</th>
-                <th class="tooltipped header hoverable wid3" data-tooltip="Overall, the quality of my learning experience in this course was:" data-position="top" onclick="sortBy('item6')">Item6</th>
-                <th class=" header hoverable wid5" onclick="sortBy('enthusiasm')">Enthusiasm</th>
-                <th class=" header hoverable wid5" onclick="sortBy('workload')">Workload</th>
-                <th class=" header hoverable wid5" onclick="sortBy('recommend')">Recommend</th>
-                <th class=" header hoverable wid5" onclick="sortBy('invited')">Invited</th>
-                <th class=" header hoverable wid5" onclick="sortBy('respondents')">Respondents</th>
-                <th class=" header hoverable wid6" onclick="sortBy('course')">Course</th>
+                <th class=" header hoverable wid5" onclick="sortClicked('dept')">Department</th>
+                <th class=" header hoverable wid5" onclick="sortClicked('division')">Division</th>
+                <th class=" header hoverable wid5" onclick="sortClicked('code')">Code</th>
+                <th class=" header hoverable wid6" onclick="sortClicked('name')">Name</th>
+                <th class=" header hoverable wid5" onclick="sortClicked('last_name')">Last name</th>
+                <th class=" header hoverable wid5" onclick="sortClicked('first_name')">First name</th>
+                <th class=" header hoverable wid3" onclick="sortClicked('term')">Term</th>
+                <th class=" header hoverable wid3" onclick="sortClicked('year')">Year</th>
+                <th class="tooltipped header hoverable wid3" data-tooltip="I found the course intellectually stimulating" data-position="top" onclick="sortClicked('item1')">Item1</th>
+                <th class="tooltipped header hoverable wid3" data-tooltip="The course provided me with a deeper understanding of the subject matter" data-position="top" onclick="sortClicked('item2')">Item2</th>
+                <th class="tooltipped header hoverable wid3" data-tooltip="The instructor created a course atmosphere that was conducive to my learning" data-position="top" onclick="sortClicked('item3')">Item3</th>
+                <th class="tooltipped header hoverable wid3" data-tooltip="Course projects, assignments, tests and/or exams improved my understanding of the course material" data-position="top" onclick="sortClicked('item4')">Item4</th>
+                <th class="tooltipped header hoverable wid3" data-tooltip="Course projects, assignments, tests and/or exams provided opportunity for me to demonstrate an understanding of the course material" data-position="top" onclick="sortClicked('item5')">Item5</th>
+                <th class="tooltipped header hoverable wid3" data-tooltip="Overall, the quality of my learning experience in this course was:" data-position="top" onclick="sortClicked('item6')">Item6</th>
+                <th class=" header hoverable wid5" onclick="sortClicked('enthusiasm')">Enthusiasm</th>
+                <th class=" header hoverable wid5" onclick="sortClicked('workload')">Workload</th>
+                <th class=" header hoverable wid5" onclick="sortClicked('recommend')">Recommend</th>
+                <th class=" header hoverable wid5" onclick="sortClicked('invited')">Invited</th>
+                <th class=" header hoverable wid5" onclick="sortClicked('respondents')">Respondents</th>
+                <th class=" header hoverable wid6" onclick="sortClicked('course')">Course</th>
             </tr>
         </thead>
     </table>
