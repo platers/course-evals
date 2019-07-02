@@ -1,6 +1,24 @@
 
+function tableCreate(data){
+    var body = document.body,
+        tbl  = document.createElement('table');
 
-d3.csv("https://raw.githubusercontent.com/platers/course-evals/master/cleandata.csv", function (data) {
-    var columns = ['dept', 'division', 'course', 'last_name', 'first_name', 'term', 'year', 'item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'enthusiasm', 'workload', 'recommend', 'invited', 'respondents', 'code', 'name']
-    console.log(data[0]);
+    for(var i = 0; i < data.length; i++){
+        var tr = tbl.insertRow();
+        var keys = Object.keys(data[i]);
+        for(var j = 0; j < keys.length; j++){
+                var td = tr.insertCell();
+                td.appendChild(document.createTextNode(data[i][keys[j]]));
+        }
+    }
+    body.appendChild(tbl);
+}
+
+d3.csv("https://raw.githubusercontent.com/platers/course-evals/master/cleandata.csv").then(function(data) {
+    console.log(data)
+    data.pop(); //last row is undefined
+    tableCreate(data);
+})
+.catch(function(error){
+    console.log("Could not load data") 
 })
