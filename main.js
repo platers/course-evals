@@ -14,10 +14,10 @@ function tableCreate(data) {
         var tr = document.createElement('tr');
         var keys = Object.keys(data[i]);
         var num_keys = keys.length;
-        for (var j = 0; j < num_keys; j++) {
+        for (var j = 0; j < num_keys - 1; j++) {    //-1 to remove course column
             var td = document.createElement('td');
             var x = data[i][keys[j]];
-            if(!isNaN(x) && x < 2000){  //truncate floats
+            if (!isNaN(x) && x < 2000) {  //truncate floats
                 x = x.toFixed(1);
             }
             td.appendChild(document.createTextNode(x));
@@ -77,7 +77,7 @@ function sortBy(data, key) {
     return data;
 }
 
-function sortClicked(key){
+function sortClicked(key) {
     if (current_sort_column == key) {
         current_sort_direction = (current_sort_direction == 'asc') ? 'desc' : 'asc';
     } else {
@@ -103,57 +103,57 @@ function applyFilters() {
     }
 
     var group_input = $('#select').val();
-    if(group_input != "none"){
+    if (group_input != "none") {
         DATA = groupBy(DATA, group_input);
     }
     DATA = sortBy(DATA, current_sort_column);
     tableCreate(DATA);
 }
 
-function groupBy(data, key){
+function groupBy(data, key) {
     var d = {};
     var grouped = [];
     for (var i = 0; i < data.length; i++) {
-        if(key == 'instructor'){
+        if (key == 'instructor') {
             var name = data[i]['first_name'] + data[i]['last_name'];
-            if(!(name in d)){
+            if (!(name in d)) {
                 d[name] = [];
             }
-            d[name].push(data[i]);   
-        } else{
-            if(!(data[i][key] in d)){
+            d[name].push(data[i]);
+        } else {
+            if (!(data[i][key] in d)) {
                 d[data[i][key]] = [];
             }
-            d[data[i][key]].push(data[i]);      
-        }  
+            d[data[i][key]].push(data[i]);
+        }
     }
-    for(var k in d){
+    for (var k in d) {
         var keys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm', 'year'];
         var dict = {};
-        for(var j of keys){
+        for (var j of keys) {
             dict[j] = [];
         }
-        for(var i = 1; i < d[k].length; i++){
-            for(var j of keys){
-                if(!isNaN(d[k][i][j])){
+        for (var i = 1; i < d[k].length; i++) {
+            for (var j of keys) {
+                if (!isNaN(d[k][i][j])) {
                     dict[j].push(d[k][i][j]);
                 }
             }
-            for(var j of keys){
-                if(dict[j].length > 0){
+            for (var j of keys) {
+                if (dict[j].length > 0) {
                     var s = 0;
-                    for(var x of dict[j]){
+                    for (var x of dict[j]) {
                         s += x;
                     }
                     d[k][0][j] = s / dict[j].length;
                     d[k][0][j] = +(d[k][0][j].toFixed(1));
-                } else{
+                } else {
                     d[k][0][j] = NaN;
                 }
             }
         }
 
-        if(key == 'dept'){
+        if (key == 'dept') {
             d[k][0]['code'] = 'N/A';
             d[k][0]['course'] = 'N/A';
             d[k][0]['last_name'] = 'N/A';
@@ -161,10 +161,10 @@ function groupBy(data, key){
             d[k][0]['term'] = 'N/A';
             d[k][0]['name'] = 'N/A';
         }
-        if(key == 'code'){
+        if (key == 'code') {
             d[k][0]['term'] = 'N/A';
         }
-        if(key == 'instructor'){
+        if (key == 'instructor') {
             d[k][0]['code'] = 'N/A';
             d[k][0]['course'] = 'N/A';
             d[k][0]['term'] = 'N/A';

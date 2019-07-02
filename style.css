@@ -3,6 +3,10 @@ table{
     width: 100%;
 }
 
+body{
+    padding: 15px;
+}
+
 .header{
     cursor: pointer;
     text-align: center;
