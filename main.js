@@ -16,7 +16,11 @@ function tableCreate(data) {
         var num_keys = keys.length;
         for (var j = 0; j < num_keys; j++) {
             var td = document.createElement('td');
-            td.appendChild(document.createTextNode(data[i][keys[j]]));
+            var x = data[i][keys[j]];
+            if(!isNaN(x) && x < 2000){  //truncate floats
+                x = x.toFixed(1);
+            }
+            td.appendChild(document.createTextNode(x));
             tr.appendChild(td);
         }
         tbdy.appendChild(tr);
@@ -102,6 +106,7 @@ function applyFilters() {
     if(group_input != "none"){
         DATA = groupBy(DATA, group_input);
     }
+    DATA = sortBy(DATA, current_sort_column);
     tableCreate(DATA);
 }
 
@@ -123,7 +128,7 @@ function groupBy(data, key){
         }  
     }
     for(var k in d){
-        var keys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm'];
+        var keys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm', 'year'];
         var dict = {};
         for(var j of keys){
             dict[j] = [];
