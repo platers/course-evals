@@ -14,6 +14,28 @@
 <body>
     <h1>Course Evaluations</h1>
 
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s2">
+                <input placeholder="CSC148" id="code" type="text">
+                <label for="code">Course Code</label>
+            </div>
+            <div class="input-field col s2">
+                <input placeholder="CSC" id="dept" type="text">
+                <label for="dept">Department</label>
+            </div>
+            <div class="input-field col s3">
+                <input placeholder="Liu" id="last_name" type="text">
+                <label for="last_name">Last Name</label>
+            </div>
+            <div class="input-field col s3">
+                <input placeholder="David" id="first_name" type="text">
+                <label for="first_name">First Name</label>
+            </div>
+            <div class="btn" onclick="applyFilters()">Apply Filters</div>
+        </div>
+    </form>
+
     <table class="highlight">
         <thead>
             <tr>
@@ -31,8 +53,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script src="jquery-csv.js"></script>
-        <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="jquery-csv.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 
     <script src="main.js"></script>
 </body>

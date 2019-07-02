@@ -3,7 +3,7 @@ var DATA;
 function tableCreate(data) {
     var tbl = document.getElementsByTagName('table')[0];
     var el = document.getElementsByTagName('tbody');
-    if(el.length){
+    if (el.length) {
         console.log(el);
         el[0].remove();
     }
@@ -34,16 +34,16 @@ d3.csv(large).then(function (data) {
     tableCreate(data);
 })
 
-function compareValues(key, order='asc'){
-    return function(a, b){
-        if(!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+function compareValues(key, order = 'asc') {
+    return function (a, b) {
+        if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
             // property doesn't exist on either object
             console.log("bad");
             return 0;
-          }
-        if(order == 'desc'){
+        }
+        if (order == 'desc') {
             return (a[key] < b[key]) * 2 - 1;
-        } else{
+        } else {
             return (a[key] > b[key]) * 2 - 1;
         }
     }
@@ -51,15 +51,32 @@ function compareValues(key, order='asc'){
 
 var current_sort_column = 'dept';
 var current_sort_direction = 'asc';
-function sortBy(key){
-    if(current_sort_column == key){
+function sortBy(key) {
+    if (current_sort_column == key) {
         current_sort_direction = (current_sort_direction == 'asc') ? 'desc' : 'asc';
-    } else{
+    } else {
         current_sort_direction = 'asc';
     }
     current_sort_column = key;
     console.log(key, current_sort_direction);
     DATA.sort(compareValues(key, current_sort_direction));
     console.log("Sorted", DATA[0]);
+    tableCreate(DATA);
+}
+
+function applyFilters() {
+    DATA = [];
+    var code_input = document.getElementById('code').value;
+    var dept_input = document.getElementById('dept').value;
+    var last_name_input = document.getElementById('last_name').value;
+    var first_name_input = document.getElementById('first_name').value;
+    for (var i = 0; i < RAW_DATA.length; i++) {
+        if ((new RegExp(code_input, 'i')).test(RAW_DATA[i].code) &&
+            (new RegExp(dept_input, 'i')).test(RAW_DATA[i].dept) &&
+            (new RegExp(last_name_input, 'i')).test(RAW_DATA[i].last_name) &&
+            (new RegExp(first_name_input, 'i')).test(RAW_DATA[i].first_name)) {
+            DATA.push(RAW_DATA[i]);
+        }
+    }
     tableCreate(DATA);
 }
