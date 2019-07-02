@@ -24,11 +24,26 @@ function tableCreate(data) {
     tbl.appendChild(tbdy);
 }
 
-var small = 'https://raw.githubusercontent.com/platers/course-evals/master/small.csv';
+var small = 'https://raw.githubusercontent.com/platers/course-evals/master/small.csv';  //only for testing
 var large = 'https://raw.githubusercontent.com/platers/course-evals/master/cleandata.csv';
 d3.csv(large).then(function (data) {
     //console.log(data)
     data.pop(); //last row is undefined
+    for (var i = 0; i < data.length; i++) {
+        data[i]['item1'] = parseFloat(data[i]['item1']);
+        data[i]['item2'] = parseFloat(data[i]['item2']);
+        data[i]['item3'] = parseFloat(data[i]['item3']);
+        data[i]['item4'] = parseFloat(data[i]['item4']);
+        data[i]['item5'] = parseFloat(data[i]['item5']);
+        data[i]['item6'] = parseFloat(data[i]['item6']);
+        data[i]['year'] = parseInt(data[i]['year']);
+        data[i]['enthusiasm'] = parseFloat(data[i]['enthusiasm']);
+        data[i]['workload'] = parseFloat(data[i]['workload']);
+        data[i]['recommend'] = parseFloat(data[i]['recommend']);
+        data[i]['invited'] = parseInt(data[i]['recommend']);
+        data[i]['respondents'] = parseInt(data[i]['respondents']);
+    }
+
     DATA = data;
     RAW_DATA = data;
     tableCreate(data);
@@ -78,5 +93,82 @@ function applyFilters() {
             DATA.push(RAW_DATA[i]);
         }
     }
+
+    var group_input = $('#select').val();
+    if(group_input != ""){
+        DATA = groupBy(DATA, group_input);
+    }
     tableCreate(DATA);
 }
+
+function groupBy(data, key){
+    var d = {};
+    var grouped = [];
+    for (var i = 0; i < data.length; i++) {
+        if(!(data[i][key] in d)){
+            d[data[i][key]] = [];
+        }
+        d[data[i][key]].push(data[i]);        
+    }
+    for(var k in d){
+        for(var i = 1; i < d[k].length; i++){
+            d[k][0]['item1'] += d[k][i]['item1'];
+            d[k][0]['item2'] += d[k][i]['item2'];
+            d[k][0]['item3'] += d[k][i]['item3'];
+            d[k][0]['item4'] += d[k][i]['item4'];
+            d[k][0]['item5'] += d[k][i]['item5'];
+            d[k][0]['item6'] += d[k][i]['item6'];
+            d[k][0]['invited'] += d[k][i]['invited'];
+            d[k][0]['recommend'] += d[k][i]['recommend'];
+            d[k][0]['workload'] += d[k][i]['workload'];
+            d[k][0]['respondents'] += d[k][i]['respondents'];
+            d[k][0]['enthusiasm'] += d[k][i]['enthusiasm'];
+        }
+        d[k][0]['item1'] /= d[k].length;
+        d[k][0]['item2'] /= d[k].length;
+        d[k][0]['item3'] /= d[k].length;
+        d[k][0]['item4'] /= d[k].length;
+        d[k][0]['item5'] /= d[k].length;
+        d[k][0]['item6'] /= d[k].length;
+        d[k][0]['invited'] /= d[k].length;
+        d[k][0]['recommend'] /= d[k].length;
+        d[k][0]['workload'] /= d[k].length;
+        d[k][0]['respondents'] /= d[k].length;
+        d[k][0]['enthusiasm'] /= d[k].length;
+        d[k][0]['item1'] = +(d[k][0]['item1'].toFixed(1));
+        d[k][0]['item2'] = +(d[k][0]['item2'].toFixed(1));
+        d[k][0]['item3'] = +(d[k][0]['item3'].toFixed(1));
+        d[k][0]['item4'] = +(d[k][0]['item4'].toFixed(1));
+        d[k][0]['item5'] = +(d[k][0]['item5'].toFixed(1));
+        d[k][0]['item6'] = +(d[k][0]['item6'].toFixed(1));
+        d[k][0]['invited'] = +(d[k][0]['invited'].toFixed(1));
+        d[k][0]['recommend'] = +(d[k][0]['recommend'].toFixed(1));
+        d[k][0]['workload'] = +(d[k][0]['workload'].toFixed(1));
+        d[k][0]['respondents'] = +(d[k][0]['respondents'].toFixed(1));
+        d[k][0]['enthusiasm'] = +(d[k][0]['enthusiasm'].toFixed(1));
+
+        if(key == 'dept'){
+            d[k][0]['code'] = 'N/A';
+            d[k][0]['course'] = 'N/A';
+            d[k][0]['last_name'] = 'N/A';
+            d[k][0]['first_name'] = 'N/A';
+            d[k][0]['term'] = 'N/A';
+            d[k][0]['name'] = 'N/A';
+        }
+        if(key == 'code'){
+            d[k][0]['term'] = 'N/A';
+        }
+        if(key == 'instructor'){
+            d[k][0]['code'] = 'N/A';
+            d[k][0]['course'] = 'N/A';
+            d[k][0]['term'] = 'N/A';
+            d[k][0]['name'] = 'N/A';
+        }
+        grouped.push(d[k][0]);
+    }
+    return grouped;
+}
+
+$(document).ready(function() {  // required for materialize select
+    $('select').formSelect();
+});
