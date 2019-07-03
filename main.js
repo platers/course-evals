@@ -128,18 +128,24 @@ function groupBy(data, key) {
         }
     }
     for (var k in d) {
-        var keys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm', 'year'];
+        var numericalKeys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm', 'year'];
+        var stringKeys = ['dept', 'division', 'code', 'name', 'first_name', 'last_name', 'term'];
         var dict = {};
-        for (var j of keys) {
+        for (var j of numericalKeys) {
             dict[j] = [];
         }
-        for (var i = 1; i < d[k].length; i++) {
-            for (var j of keys) {
+        for (var i = 0; i < d[k].length; i++) {
+            for (var j of numericalKeys) {
                 if (!isNaN(d[k][i][j])) {
                     dict[j].push(d[k][i][j]);
                 }
             }
-            for (var j of keys) {
+            for (var j of stringKeys) {
+                if (d[k][i][j] != d[k][0][j]) {
+                    d[k][0][j] = 'N/A';
+                }
+            }
+            for (var j of numericalKeys) {
                 if (dict[j].length > 0) {
                     var s = 0;
                     for (var x of dict[j]) {
@@ -151,26 +157,6 @@ function groupBy(data, key) {
                     d[k][0][j] = NaN;
                 }
             }
-        }
-
-        if (key == 'dept') {
-            d[k][0]['code'] = 'N/A';
-            d[k][0]['course'] = 'N/A';
-            d[k][0]['last_name'] = 'N/A';
-            d[k][0]['first_name'] = 'N/A';
-            d[k][0]['term'] = 'N/A';
-            d[k][0]['name'] = 'N/A';
-        }
-        if (key == 'code') {
-            d[k][0]['term'] = 'N/A';
-            d[k][0]['last_name'] = 'N/A';
-            d[k][0]['first_name'] = 'N/A';
-        }
-        if (key == 'instructor') {
-            d[k][0]['code'] = 'N/A';
-            d[k][0]['course'] = 'N/A';
-            d[k][0]['term'] = 'N/A';
-            d[k][0]['name'] = 'N/A';
         }
         grouped.push(d[k][0]);
     }
