@@ -29,7 +29,7 @@ function tableCreate(data) {
 }
 
 var small = 'https://raw.githubusercontent.com/platers/course-evals/master/small.csv';  //only for testing
-var large = 'https://raw.githubusercontent.com/platers/course-evals/master/cleandata.csv';
+var large = 'https://raw.githubusercontent.com/platers/course-evals/master/cleandata.csv';  //change to local directory when done testing
 d3.csv(large).then(function (data) {
     //console.log(data)
     data.pop(); //last row is undefined
