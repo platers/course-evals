@@ -60,6 +60,9 @@ function compareValues(key, order = 'asc') {
             console.log("bad");
             return 0;
         }
+        if(isNaN(a[key]) != isNaN(b[key])){ //push NaN's to bottom
+            return (isNaN(a[key])) * 2 - 1;
+        }
         if (order == 'desc') {
             return (a[key] < b[key]) * 2 - 1;
         } else {
@@ -72,7 +75,7 @@ var current_sort_column = 'dept';
 var current_sort_direction = 'asc';
 function sortBy(data, key) {
     current_sort_column = key;
-    console.log(key, current_sort_direction);
+    //console.log(key, current_sort_direction);
     data.sort(compareValues(key, current_sort_direction));
     return data;
 }
