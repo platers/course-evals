@@ -26,32 +26,29 @@
 
 <body>
     <h1>Course Evaluations</h1>
-    <h3>Usage</h3>
     <p>Course evaluation results for the Faculty of Arts & Science (Undergraduate Programs) are displayed here. <br>
-
         Responses range from 1 to 5, with 1 as the lowest rating and 5 as the highest rating.<br>
+        To refine your search, simply type queries into the search bars.<br>
+        In the group by drop down you can merge rows with the same code/deptartment/instructor.<br>
+        Click any column header to sort the data using that column. Click again to reverse the sort order.<br>
         
-        You can browse courses by using the drop down menus or the search function. In the drop down, you can limit results to specific course codes. <br>
-        To refine your search, simply type the names of courses or instructors into the search bar.<br>
-        
-        N/A – not available – indicates where an item did not appear on the evaluation form.
         </p>
     <form class="col s12">
         <div class="row">
             <div class="input-field col s1">
-                <input placeholder="CSC" id="dept" type="text">
+                <input placeholder="CSC" id="dept" type="text" class="autocomplete">
                 <label for="dept">Department</label>
             </div>
             <div class="input-field col s1">
-                <input placeholder="CSC148" id="code" type="text">
+                <input placeholder="CSC148" id="code" type="text" class="autocomplete">
                 <label for="code">Course Code</label>
             </div>
             <div class="input-field col s2">
-                <input placeholder="Liu" id="last_name" type="text">
+                <input placeholder="Liu" id="last_name" type="text" class="autocomplete">
                 <label for="last_name">Last Name</label>
             </div>
             <div class="input-field col s2">
-                <input placeholder="David" id="first_name" type="text">
+                <input placeholder="David" id="first_name" type="text" class="autocomplete">
                 <label for="first_name">First Name</label>
             </div>
             <div class="input-field col s1">

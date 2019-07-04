@@ -1,3 +1,7 @@
+
+M.AutoInit();   //initialize materialize
+
+
 var RAW_DATA;
 var DATA;
 function tableCreate(data) {
@@ -28,29 +32,40 @@ function tableCreate(data) {
     tbl.appendChild(tbdy);
 }
 
+function populateAutocomplete(data){
+    var dept = {};
+    var code = {};
+    var last = {};
+    var first = {};
+    for (var i = 0; i < data.length; i++) {
+        dept[data[i].dept] = null;
+        code[data[i].code] = null;
+        last[data[i].last_name] = null;
+        first[data[i].first_name] = null;
+
+    }
+    $('#dept').autocomplete('updateData', dept);
+    $('#code').autocomplete('updateData', code);
+    $('#last_name').autocomplete('updateData', last);
+    $('#first_name').autocomplete('updateData', first);
+}
+
 var small = 'https://raw.githubusercontent.com/platers/course-evals/master/small.csv';  //only for testing
 var large = 'https://raw.githubusercontent.com/platers/course-evals/master/cleandata.csv';  //change to local directory when done testing
-d3.csv(large).then(function (data) {
+d3.csv(large).then(function (data) {    //process data from csv
     //console.log(data)
     data.pop(); //last row is undefined
+    var numericalKeys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm'];
     for (var i = 0; i < data.length; i++) {
-        data[i]['item1'] = parseFloat(data[i]['item1']);
-        data[i]['item2'] = parseFloat(data[i]['item2']);
-        data[i]['item3'] = parseFloat(data[i]['item3']);
-        data[i]['item4'] = parseFloat(data[i]['item4']);
-        data[i]['item5'] = parseFloat(data[i]['item5']);
-        data[i]['item6'] = parseFloat(data[i]['item6']);
-        data[i]['year'] = parseInt(data[i]['year']);
-        data[i]['enthusiasm'] = parseFloat(data[i]['enthusiasm']);
-        data[i]['workload'] = parseFloat(data[i]['workload']);
-        data[i]['recommend'] = parseFloat(data[i]['recommend']);
-        data[i]['invited'] = parseFloat(data[i]['invited']);
-        data[i]['respondents'] = parseFloat(data[i]['respondents']);
-    }
+        for(var k of numericalKeys){
+            data[i][k] = parseFloat(data[i][k]);
+        }
 
+    }
     DATA = Array.from(data);
     RAW_DATA = Array.from(data);
     tableCreate(data);
+    populateAutocomplete(Array.from(data));
 })
 
 function compareValues(key, order = 'asc') {
@@ -59,6 +74,9 @@ function compareValues(key, order = 'asc') {
             // property doesn't exist on either object
             console.log("bad");
             return 0;
+        }
+        if(isNaN(a[key]) != isNaN(b[key])){ //push NaN's to bottom
+            return (isNaN(a[key])) * 2 - 1;
         }
         if (order == 'desc') {
             return (a[key] < b[key]) * 2 - 1;
@@ -72,7 +90,7 @@ var current_sort_column = 'dept';
 var current_sort_direction = 'asc';
 function sortBy(data, key) {
     current_sort_column = key;
-    console.log(key, current_sort_direction);
+    //console.log(key, current_sort_direction);
     data.sort(compareValues(key, current_sort_direction));
     return data;
 }
@@ -128,8 +146,8 @@ function groupBy(data, key) {
         }
     }
     for (var k in d) {
-        var numericalKeys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm', 'year'];
-        var stringKeys = ['dept', 'division', 'code', 'name', 'first_name', 'last_name', 'term'];
+        var numericalKeys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm'];
+        var stringKeys = ['dept', 'division', 'code', 'name', 'first_name', 'last_name', 'term', 'year'];
         var dict = {};
         for (var j of numericalKeys) {
             dict[j] = [];
@@ -162,5 +180,3 @@ function groupBy(data, key) {
     }
     return grouped;
 }
-
-M.AutoInit();
