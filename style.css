@@ -1,44 +1,45 @@
-table{
+table {
     table-layout: fixed;
     width: 1500px;
 }
 
-th{
-    position: -webkit-sticky; /* for Safari */
-  position: sticky;
-  top: 0;
-  background-color: white;
+th {
+    position: -webkit-sticky;
+    /* for Safari */
+    position: sticky;
+    top: 0;
+    background-color: white;
 }
 
-body{
+body {
     padding: 15px;
 }
 
-.header{
+.header {
     cursor: pointer;
     text-align: center;
 }
 
-.wid3{
+.wid3 {
     width: 3%;
 }
 
-.wid5{
+.wid5 {
     width: 5%;
 }
 
-.wid6{
+.wid6 {
     width: 6%;
 }
 
-.wid10{
+.wid10 {
     width: 10%;
 }
 
-td{
+td {
     text-align: center;
 }
 
-ul{
+ul {
     width: 800px;
 }
