@@ -16,7 +16,10 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143159541-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
 
         gtag('config', 'UA-143159541-1');
@@ -26,7 +29,11 @@
 
 <body>
     <h1>Course Evaluations</h1>
-
+    <p>
+        Course evaluation results for the Faculty of Arts & Science (Undergraduate Programs) are displayed here. <br> Responses range from 1 to 5, with 1 as the lowest rating and 5 as the highest rating.<br> To refine your search, simply type queries
+        into the search bars.<br> In the group by drop down you can merge rows with the same code/deptartment/instructor.
+        <br> Click any column header to sort the data using that column. Click again to reverse the sort order.<br> Tip: Filtering course codes by "CSC3" will only show 3rd year CS courses
+    </p>
     <form class="col s12">
         <div class="row">
             <div class="input-field col s1">
@@ -57,55 +64,37 @@
             <div class="btn" onclick="applyFilters()">Apply Filters</div>
         </div>
     </form>
-
-    <table class="highlight">
-        <thead>
-            <tr>
-                <th class="header hoverable wid5" onclick="sortClicked('dept')">Department</th>
-                <th class="header hoverable wid5" onclick="sortClicked('division')">Division</th>
-                <th class="header hoverable wid5" onclick="sortClicked('code')">Code</th>
-                <th class="header hoverable wid6" onclick="sortClicked('name')">Name</th>
-                <th class="header hoverable wid5" onclick="sortClicked('last_name')">Last name</th>
-                <th class="header hoverable wid5" onclick="sortClicked('first_name')">First name</th>
-                <th class="header hoverable wid3" onclick="sortClicked('term')">Term</th>
-                <th class="header hoverable wid3" onclick="sortClicked('year')">Year</th>
-                <th class="tooltipped header hoverable wid3"
-                    data-tooltip="I found the course intellectually stimulating" data-position="top"
-                    onclick="sortClicked('item1')">Item1</th>
-                <th class="tooltipped header hoverable wid3"
-                    data-tooltip="The course provided me with a deeper understanding of the subject matter"
-                    data-position="top" onclick="sortClicked('item2')">Item2</th>
-                <th class="tooltipped header hoverable wid3"
-                    data-tooltip="The instructor created a course atmosphere that was conducive to my learning"
-                    data-position="top" onclick="sortClicked('item3')">Item3</th>
-                <th class="tooltipped header hoverable wid3"
-                    data-tooltip="Course projects, assignments, tests and/or exams improved my understanding of the course material"
-                    data-position="top" onclick="sortClicked('item4')">Item4</th>
-                <th class="tooltipped header hoverable wid3"
-                    data-tooltip="Course projects, assignments, tests and/or exams provided opportunity for me to demonstrate an understanding of the course material"
-                    data-position="top" onclick="sortClicked('item5')">Item5</th>
-                <th class="tooltipped header hoverable wid3"
-                    data-tooltip="Overall, the quality of my learning experience in this course was:"
-                    data-position="top" onclick="sortClicked('item6')">Item6</th>
-                <th class="tooltipped header hoverable wid5" data-tooltip="Instructor generated enthusiasm"
-                    data-position="top" onclick="sortClicked('enthusiasm')">Enthusiasm</th>
-                <th class="tooltipped header hoverable wid5" data-tooltip="Course workload" data-position="top"
-                    onclick="sortClicked('workload')">Workload</th>
-                <th class="tooltipped header hoverable wid5" data-tooltip="I would recommend this course"
-                    data-position="top" onclick="sortClicked('recommend')">Recommend</th>
-                <th class="tooltipped header hoverable wid5" data-tooltip="Number of students invited"
-                    data-position="top" onclick="sortClicked('invited')">Invited</th>
-                <th class="tooltipped header hoverable wid5" data-tooltip="Number of respondents" data-position="top"
-                    onclick="sortClicked('respondents')">Respondents</th>
-                <!-- <th class="header hoverable wid6" onclick="sortClicked('course')">Course</th> -->
-            </tr>
-        </thead>
-    </table>
-
+    <div class="table-container">
+        <table class="highlight">
+            <thead>
+                <tr>
+                    <th class="header hoverable wid5" onclick="sortClicked('dept')">Department</th>
+                    <th class="header hoverable wid5" onclick="sortClicked('division')">Division</th>
+                    <th class="header hoverable wid5" onclick="sortClicked('code')">Code</th>
+                    <th class="header hoverable wid6" onclick="sortClicked('name')">Name</th>
+                    <th class="header hoverable wid5" onclick="sortClicked('last_name')">Last name</th>
+                    <th class="header hoverable wid5" onclick="sortClicked('first_name')">First name</th>
+                    <th class="header hoverable wid3" onclick="sortClicked('term')">Term</th>
+                    <th class="header hoverable wid3" onclick="sortClicked('year')">Year</th>
+                    <th class="tooltipped header hoverable wid3" data-tooltip="I found the course intellectually stimulating" data-position="top" onclick="sortClicked('item1')">Item1</th>
+                    <th class="tooltipped header hoverable wid3" data-tooltip="The course provided me with a deeper understanding of the subject matter" data-position="top" onclick="sortClicked('item2')">Item2</th>
+                    <th class="tooltipped header hoverable wid3" data-tooltip="The instructor created a course atmosphere that was conducive to my learning" data-position="top" onclick="sortClicked('item3')">Item3</th>
+                    <th class="tooltipped header hoverable wid3" data-tooltip="Course projects, assignments, tests and/or exams improved my understanding of the course material" data-position="top" onclick="sortClicked('item4')">Item4</th>
+                    <th class="tooltipped header hoverable wid3" data-tooltip="Course projects, assignments, tests and/or exams provided opportunity for me to demonstrate an understanding of the course material" data-position="top" onclick="sortClicked('item5')">Item5</th>
+                    <th class="tooltipped header hoverable wid3" data-tooltip="Overall, the quality of my learning experience in this course was:" data-position="top" onclick="sortClicked('item6')">Item6</th>
+                    <th class="tooltipped header hoverable wid5" data-tooltip="Instructor generated enthusiasm" data-position="top" onclick="sortClicked('enthusiasm')">Enthusiasm</th>
+                    <th class="tooltipped header hoverable wid5" data-tooltip="Course workload" data-position="top" onclick="sortClicked('workload')">Workload</th>
+                    <th class="tooltipped header hoverable wid5" data-tooltip="I would recommend this course" data-position="top" onclick="sortClicked('recommend')">Recommend</th>
+                    <th class="tooltipped header hoverable wid5" data-tooltip="Number of students invited" data-position="top" onclick="sortClicked('invited')">Invited</th>
+                    <th class="tooltipped header hoverable wid5" data-tooltip="Number of respondents" data-position="top" onclick="sortClicked('respondents')">Respondents</th>
+                    <!-- <th class="header hoverable wid6" onclick="sortClicked('course')">Course</th> -->
+                </tr>
+            </thead>
+        </table>
+    </div>
     <!--JavaScript at end of body for optimized loading-->
     <!-- Compiled and minified JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
 

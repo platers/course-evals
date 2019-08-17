@@ -51,11 +51,11 @@ function populateAutocomplete(data){
 }
 
 var small = 'https://raw.githubusercontent.com/platers/course-evals/master/small.csv';  //only for testing
-var large = 'https://raw.githubusercontent.com/platers/course-evals/master/cleandata.csv';
+var large = 'https://raw.githubusercontent.com/platers/course-evals/master/cleandata.csv';  //change to local directory when done testing
 d3.csv(large).then(function (data) {    //process data from csv
     //console.log(data)
     data.pop(); //last row is undefined
-    var numericalKeys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm', 'year'];
+    var numericalKeys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm'];
     for (var i = 0; i < data.length; i++) {
         for(var k of numericalKeys){
             data[i][k] = parseFloat(data[i][k]);
@@ -146,8 +146,8 @@ function groupBy(data, key) {
         }
     }
     for (var k in d) {
-        var numericalKeys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm', 'year'];
-        var stringKeys = ['dept', 'division', 'code', 'name', 'first_name', 'last_name', 'term'];
+        var numericalKeys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'invited', 'recommend', 'workload', 'respondents', 'enthusiasm'];
+        var stringKeys = ['dept', 'division', 'code', 'name', 'first_name', 'last_name', 'term', 'year'];
         var dict = {};
         for (var j of numericalKeys) {
             dict[j] = [];
